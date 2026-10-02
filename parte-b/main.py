@@ -64,7 +64,7 @@ def read_root():
 def leer_libro(libro: str):
     for i in libreria:              
         if i["titulo"] == libro:   
-            return libro                
+            return i                
     raise HTTPException(status_code=404, detail="Libro no encontrado")
 
 @app.put("/libros/{libro}") # b6 - put/actualizar
