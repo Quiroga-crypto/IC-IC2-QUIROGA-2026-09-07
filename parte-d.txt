@@ -1,0 +1,56 @@
+D3 — Pub/sub vs request/response:
+La diferencia entre ambos modelos es que, "request/response" al 
+enviar un mensaje este epera un respuesta. y en el modelo: "pub/sub"
+uno manda la respuesta a todos lados y solo la resive el que esta 
+suscripto.
+
+D4 — Topics y jerarquía:
+el que qiere tood de la cocina se suscribiria a 'casa/cocina/+'.
+widcards:
+'+'= puede usarse mas de una vez y reemplaza un nivel de topics
+'casa/cocina/+' o 'casa/+/+' tambien es posible.
+'#' este comodin solo se puede usar unavez y reemplaazza a los demas
+topics exepto el topic raiz. 'casa/#' siendo que con esta widcards 
+veremos todos las posibles entradas.
+
+D5 — Diseñá tus topics:
+
+CASA/
+CASA/DORMITORIO
+CASA/LIVING
+CASA/BAñO
+CASA/DORMITORIO/S. PROXIMIDAD
+CASA/LIVING/S. PROXIMIDAD
+CASA/BAñO/S. PROXIMIDAD
+CASA/DORMITORIO/S. HUMO
+CASA/LIVING/S. HUMO
+CASA/BAñO/S. HUMO
+
+D6 — QoS, la idea (sin implementarlo)
+para resivir la mediciones de el S. de temperatura solo vasta con el 
+modelo QoS 0, ya que se estaran enviando datos frecuentemente y no 
+hay problema si se pierde alguno.
+para el ej. de la puerta se usa QoS 1, siendo que es necesario que el
+mensaje llegue al menos na vez. ademas no afecta que el mesaje este 
+duplicado en este caso.
+el modelo QoS 2, es util cuando es necesario que el mensaje se envie 
+una vez y solo una vez, ej. una trasferencia de banco.
+
+D7 — Mensajes retenidos (*retained*)
+
+un menaseje retenido 'retained' es el ultimo mensaje que se guarda 
+para que siempre halla una respuesta. por ej. si uno se suscribe
+pero todavia no hay ninguna publicacion el suscriptor no podra 
+acceder a esa informacion hasta que se publique de vuelta. para
+que no ocurra este problema existe el mensaje retenido.
+
+D8 — MQTT vs. preguntar todo el tiempo (polling)
+
+Tomando como ejemplo un sensor de cualquier tipo, si a este
+le estuvieran pregunta cada segundo si hay algun cambio,
+no seria tan pesado para la api, pero si se hiciera la misma 
+pregunta a mil sensoresa la vez el trafico de informacion seria
+abismal. En cambio el modelo pub/sub los sensores publican solo 
+cuando hay algun cambio y solo lo resiben los que estan suscriptos
+siendo que en este caso es mucho mejor usar este modelo que al
+modelo 'polling'.
