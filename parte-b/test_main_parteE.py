@@ -38,6 +38,8 @@ def test_agregar_invalido():
     assert posteo.status_code == 422  
     assert isinstance(posteo.json(), dict)
 
+#E4 testeo de secunecia
+
 def test_get_libros_devuelve_libro():
     respuesta = client.get("/libros")
     assert respuesta.status_code == 200
